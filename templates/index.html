@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Colorization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+            justify-content: flex-start;
+            /* Ensure everything stays at the top */
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .result div {
+            width: 48%;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .uploaddiv {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            padding:0px 50px;
+            border: 5px solid #ccc;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="uploaddiv">
+        <h1>Upload a Black and White Image for Colorization</h1>
+        <form action="/colorize" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Colorize</button>
+        </form>
+    </div>
+    <div class="container">
+        <!-- Display the original and colorized images in side-by-side columns -->
+        {% if original_image and colorized_image %}
+        <div class="result">
+            <div>
+                <h2>Original Image</h2>
+                <img src="data:image/jpeg;base64,{{ original_image }}" alt="Original Image">
+            </div>
+            <div>
+                <h2>Colorized Image</h2>
+                <img src="data:image/jpeg;base64,{{ colorized_image }}" alt="Colorized Image">
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
